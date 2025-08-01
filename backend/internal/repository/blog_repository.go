@@ -1,6 +1,6 @@
 package repository
 
-import "Proyecto-Blog-con-Roles-de-Usuario-y-Comentarios/backend/internal/domain"
+import "github.com/SpeardyDev/Proyecto-Blog-con-Roles-de-Usuario-y-Comentarios/backend/internal/domain"
 
 type BlogRepository interface {
 	Create(blog *domain.Blog) error
