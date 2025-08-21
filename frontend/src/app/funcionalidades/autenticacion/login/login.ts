@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +19,13 @@ export class LoginComponent {
     this.mostrarContrasena = !this.mostrarContrasena;
   }
 
+  constructor(private router: Router) {}
+
   onLogin(form: any) {
     if (form.valid) {
       console.log('Usuario:', this.username);
       console.log('Contraseña:', this.password);
-      // Aquí puedes implementar tu lógica de autenticación
+      this.router.navigate(['/lista']);
     } else {
       console.warn('Formulario inválido');
     }
