@@ -51,11 +51,11 @@ func (r *Router) SetupRoutes() *gin.Engine {
 
 		// Blogs públicos (solo lectura)
 		public.GET("/blogs", r.blogHandler.ListBlogs)
-		public.GET("/blogs/:id", r.blogHandler.GetBlog)
 		public.GET("/blogs/author/:authorId", r.blogHandler.GetBlogsByAuthor)
+		public.GET("/blogs/:id", r.blogHandler.GetBlog)
 
 		// Comentarios públicos (solo lectura)
-		public.GET("/blogs/:blogId/comments", r.commentHandler.GetCommentsByBlog)
+		public.GET("/blogs/:id/comments", r.commentHandler.GetCommentsByBlog)
 	}
 
 	// Rutas protegidas (requieren autenticación)
@@ -72,7 +72,7 @@ func (r *Router) SetupRoutes() *gin.Engine {
 		protected.DELETE("/blogs/:id", r.blogHandler.DeleteBlog)
 
 		// Gestión de comentarios (autenticados)
-		protected.POST("/blogs/:blogId/comments", r.commentHandler.CreateComment)
+		protected.POST("/blogs/:id/comments", r.commentHandler.CreateComment)
 		protected.PUT("/comments/:id", r.commentHandler.UpdateComment)
 		protected.DELETE("/comments/:id", r.commentHandler.DeleteComment)
 	}

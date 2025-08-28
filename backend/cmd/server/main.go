@@ -1,7 +1,7 @@
 package main
 
 import (
-	"blog-backend/adapters/api/http"
+	httprouter "blog-backend/adapters/api/http"
 	"blog-backend/adapters/api/http/middleware"
 	"blog-backend/adapters/auth"
 	"blog-backend/adapters/config"
@@ -10,12 +10,9 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"net/http"
-	"os"
 
-	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -57,23 +54,18 @@ func main() {
 	// Crear middleware de autenticación
 	authMiddleware := middleware.NewAuthMiddleware(jwtService)
 
-	// Crear router HTTP
-	router := http.NewRouter(userService, authService, blogService, commentService, authMiddleware)
+	// Configurar las rutas usando el router
+	router := httprouter.NewRouter(userService, authService, blogService, commentService, authMiddleware)
 	ginEngine := router.SetupRoutes()
 
-	// Configurar servidor HTTP
 	serverAddr := fmt.Sprintf("%s:%s", cfg.Server.Host, cfg.Server.Port)
-	server := &http.Server{
-		Addr:    serverAddr,
-		Handler: ginEngine,
-	}
 
 	log.Printf("Servidor iniciando en %s", serverAddr)
 	log.Printf("API disponible en http://%s/api", serverAddr)
 	log.Printf("Endpoint de salud en http://%s/health", serverAddr)
 
-	// Iniciar servidor
-	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+	// Iniciar servidor usando Gin directamente
+	if err := ginEngine.Run(serverAddr); err != nil {
 		log.Fatalf("Error iniciando servidor: %v", err)
 	}
 }
