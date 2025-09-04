@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Crear } from './crear';
+import { CommentBox } from './comment-box';
 
-describe('Crear', () => {
-  let component: Crear;
-  let fixture: ComponentFixture<Crear>;
+describe('CommentBox', () => {
+  let component: CommentBox;
+  let fixture: ComponentFixture<CommentBox>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Crear]
+      imports: [CommentBox]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Crear);
+    fixture = TestBed.createComponent(CommentBox);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-crear',
   imports: [],
-  templateUrl: './crear.html',
-  styleUrl: './crear.scss'
+  templateUrl: './create.html',
+  styleUrl: './create.scss'
 })
-export class Crear {
+export class Create {
 
 }

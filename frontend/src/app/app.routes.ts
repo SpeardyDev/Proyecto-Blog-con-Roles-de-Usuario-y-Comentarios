@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './funcionalidades/autenticacion/login/login';
-import { Lista } from './funcionalidades/blogs/lista/lista';
-import { LayoutComponent } from './compartido/componentes/layout/layout';
+import { LoginComponent } from './ui/auth/login/login';
+import { List } from './ui/blog/list/list';
+import { LayoutComponent } from './shared/componentes/layout/layout';
 
 export const routes: Routes = [
   {
@@ -11,13 +11,17 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent // ✅ standalone + FormsModule ya importado en el propio componente
   },
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'lista', component: Lista },
+      { path: 'lista', component: List }
     ]
   },
+  {
+    path: '**',
+    redirectTo: 'login'
+  }
 ];
