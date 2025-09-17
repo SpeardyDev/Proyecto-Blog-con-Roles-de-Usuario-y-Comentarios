@@ -9,4 +9,5 @@ import { NavbarComponent } from '../navbar/navbar'; // ajusta la ruta según tu 
   templateUrl: './layout.html',
   styleUrls: ['./layout.scss']
 })
+
 export class LayoutComponent {}

@@ -1,0 +1,133 @@
+// src/app/core/services/blog.service.ts
+import { Injectable } from '@angular/core';
+
+export interface Blog {
+  id: string;
+  title: string;
+  author?: {
+    name?: string;
+    avatarUrl?: string;
+  };
+  coverUrl?: string;
+  excerpt: string;
+  publishedAt: string;
+  readTimeMinutes?: number;
+  tags?: string[];
+  commentsCount?: number;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BlogService {
+  private blogs: Blog[] = [
+    {
+      id: '1',
+      title: 'How to improve customer retention in 2025',
+      coverUrl: 'https://picsum.photos/800/400?random=1',
+      excerpt: 'Short overview of strategies to increase retention using personalization and loyalty programs.',
+      publishedAt: '2025-08-15T10:00:00Z',
+      readTimeMinutes: 6,
+      tags: ['Retention', 'Marketing'],
+      commentsCount: 12
+    },
+    {
+      id: '2',
+      title: 'Designing accessible components with Tailwind',
+      coverUrl: 'https://picsum.photos/800/400?random=2',
+      excerpt: 'Practical tips to make UI components accessible and responsive using Tailwind CSS.',
+      publishedAt: '2025-07-20T08:30:00Z',
+      readTimeMinutes: 8,
+      tags: ['Accessibility', 'UI/UX'],
+      commentsCount: 3
+    },
+    {
+      id: '3',
+      title: '5 Tech Trends That Will Shape 2026',
+      coverUrl: 'https://picsum.photos/800/400?random=3',
+      excerpt: 'An overview of the technologies that are expected to dominate the next year.',
+      publishedAt: '2025-06-05T14:20:00Z',
+      readTimeMinutes: 5,
+      tags: ['Tech'],
+      commentsCount: 7
+    },
+    {
+      id: '4',
+      title: 'Marketing Automation Best Practices',
+      coverUrl: 'https://picsum.photos/800/400?random=4',
+      excerpt: 'Learn how to build automated workflows that nurture leads and save time.',
+      publishedAt: '2025-09-01T11:00:00Z',
+      readTimeMinutes: 10,
+      tags: ['Marketing'],
+      commentsCount: 15
+    },
+    {
+      id: '5',
+      title: 'UI/UX Mistakes to Avoid in 2025',
+      coverUrl: 'https://picsum.photos/800/400?random=5',
+      excerpt: 'Common pitfalls in user interface design and how to prevent them.',
+      publishedAt: '2025-05-10T09:15:00Z',
+      readTimeMinutes: 7,
+      tags: ['UI/UX', 'Design'],
+      commentsCount: 5
+    },
+    {
+      id: '6',
+      title: 'Building a Loyalty Program That Works',
+      coverUrl: 'https://picsum.photos/800/400?random=6',
+      excerpt: 'How to design a rewards program that keeps customers coming back.',
+      publishedAt: '2025-07-28T12:45:00Z',
+      readTimeMinutes: 6,
+      tags: ['Retention', 'Marketing'],
+      commentsCount: 9
+    },
+    {
+      id: '7',
+      title: 'Design Systems: Why Your Team Needs One',
+      coverUrl: 'https://picsum.photos/800/400?random=7',
+      excerpt: 'A design system can improve consistency and scalability across your products.',
+      publishedAt: '2025-08-05T13:00:00Z',
+      readTimeMinutes: 9,
+      tags: ['Design', 'UI/UX'],
+      commentsCount: 6
+    },
+    {
+      id: '8',
+      title: 'Top 10 Tools for Frontend Developers',
+      coverUrl: 'https://picsum.photos/800/400?random=8',
+      excerpt: 'Discover the must-have tools that can speed up your development process.',
+      publishedAt: '2025-07-10T16:30:00Z',
+      readTimeMinutes: 4,
+      tags: ['Tech'],
+      commentsCount: 2
+    },
+    {
+      id: '9',
+      title: 'Customer Feedback: The Secret Weapon',
+      coverUrl: 'https://picsum.photos/800/400?random=9',
+      excerpt: 'Using feedback loops to improve your product and customer experience.',
+      publishedAt: '2025-08-25T18:15:00Z',
+      readTimeMinutes: 5,
+      tags: ['Retention'],
+      commentsCount: 11
+    },
+    {
+      id: '10',
+      title: 'Creating Inclusive Digital Experiences',
+      coverUrl: 'https://picsum.photos/800/400?random=10',
+      excerpt: 'Why accessibility matters and how to make your apps usable by everyone.',
+      publishedAt: '2025-09-03T07:45:00Z',
+      readTimeMinutes: 6,
+      tags: ['Accessibility', 'UI/UX'],
+      commentsCount: 8
+    }
+  ];
+
+  getBlogs(): Blog[] {
+    return this.blogs;
+  }
+
+  getBlogById(id: string): Blog | undefined {
+    return this.blogs.find(blog => blog.id === id);
+  }
+}
