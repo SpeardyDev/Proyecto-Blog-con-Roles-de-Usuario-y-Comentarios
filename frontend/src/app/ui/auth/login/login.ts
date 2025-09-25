@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/application/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,38 +11,32 @@ import { Router } from '@angular/router';
   templateUrl: './login.html',
   styleUrls: ['./login.scss']
 })
-
 export class LoginComponent {
   username: string = '';
   password: string = '';
   mostrarContrasena: boolean = false;
+  errorMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
-  /**
-   * Cambia el estado de visibilidad de la contraseña
-   */
   toggleMostrarContrasena(): void {
     this.mostrarContrasena = !this.mostrarContrasena;
   }
 
-  /**
-   * Maneja el envío del formulario de login
-   * @param form NgForm con las validaciones del template
-   */
   onLogin(form: NgForm): void {
     if (form.valid) {
-      console.log('✅ Usuario:', this.username);
-      console.log('✅ Contraseña:', this.password);
-
-      // Aquí puedes llamar a un servicio de autenticación si lo necesitas:
-      // this.authService.login(this.username, this.password).subscribe(...)
-
-      // Redirige a la lista
-      this.router.navigate(['/lista']);
+      this.authService.login(this.username, this.password).subscribe(user => {
+        if (user) {
+          console.log('✅ Login exitoso:', user);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.router.navigate(['/lista']);
+        } else {
+          this.errorMessage = 'Usuario o contraseña incorrectos';
+        }
+      });
     } else {
-      console.warn('⚠️ Formulario inválido');
-      form.control.markAllAsTouched(); // Marca los campos para mostrar mensajes de error
+      this.errorMessage = 'Formulario inválido';
+      form.control.markAllAsTouched();
     }
   }
 }
